@@ -1,5 +1,6 @@
 var productName = document.querySelector('.product-name');
 var productQuantity = document.querySelector('.product-quantity');
+var clearAll = document.querySelector('.clear-all');
 var saveProduct = document.querySelector('.save');
 var productList = document.querySelector('.product-list');
 
@@ -10,6 +11,11 @@ saveProduct.addEventListener('click', function(e) {
 });
 
 
+clearAll.addEventListener('click', function() {
+  localStorage.clear();
+});
+
+/* Fetch Existing Products from local storage */
 function getProductFromLocal() {
   var productArray;
   if (localStorage.getItem('products') === null) {
@@ -20,7 +26,7 @@ function getProductFromLocal() {
   return productArray;
 }
 
-
+/* Add New Product to local storage */
 function addProduct(name, quantity) {
   var newProduct = {
     "name": name.value,
@@ -33,17 +39,17 @@ function addProduct(name, quantity) {
   displayProducts(newProduct.name, newProduct.quantity);
 }
 
-
-function fetchExistingCustomers() {
+/* Display Existing Products from local storage */
+function fetchExistingProducts() {
   var products = getProductFromLocal();
   products.forEach((existingMember) => {
     displayProducts(existingMember.name, existingMember.quantity);
   });
 }
 
-fetchExistingCustomers();
+fetchExistingProducts();
 
-/* Create product Card  */
+/* Create and Display product card  */
 function displayProducts(name, quantity) {
   var productCard = document.createElement('li');
   productCard.classList.add('product');
