@@ -52,17 +52,17 @@
     <main>
       <div class="wrapper">
         <h3>add your product</h3>
-        <form id="product-form">
+        <form class="product-form">
           <div class="form-group">
-          <input type="text" class="product-name" placeholder="Product name">
+          <input type="text" class="product-name" placeholder="product name">
           <span class="error"></span>
           </div>
           <div class="form-group">
-            <input type="number" class="product-quantity" placeholder="quantity">
+            <input type="number" class="product-quantity" min="1" placeholder="quantity">
             <span class="error"></span>
           </div>
           <div class="form-control">
-            <input type="submit" class="btn" value="save">
+            <input type="submit" class="btn save" value="save">
           </div>
         </form>
         <ul class="product-list"></ul>
