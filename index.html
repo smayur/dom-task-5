@@ -39,16 +39,38 @@
 </head>
 
 <body>
-
-  <!-- Header -->
-  <!-- / Header -->
-
-  <!-- Main -->
-  <!-- / Main -->
-
-  <!-- Footer -->
-  <!-- / Footer -->
-
+  <!--container start-->
+  <div class="container">
+    <!--header section start-->
+    <header>
+      <div class="wrapper">
+        <h1>local storage operation</h1>
+      </div>
+    </header>
+    <!--header section start-->
+    <!--main section start-->
+    <main>
+      <div class="wrapper">
+        <h3>add your product</h3>
+        <form id="product-form">
+          <div class="form-group">
+          <input type="text" class="product-name" placeholder="Product name">
+          <span class="error"></span>
+          </div>
+          <div class="form-group">
+            <input type="number" class="product-quantity" placeholder="quantity">
+            <span class="error"></span>
+          </div>
+          <div class="form-control">
+            <input type="submit" class="btn" value="save">
+          </div>
+        </form>
+        <ul class="product-list"></ul>
+      </div>
+    </main>
+    <!--main section end-->
+  </div>
+  <!--container end-->
 <script src="./assets/vendor/jquery-1.8.3.min.js"></script>
 <script src="./assets/js/script.js"></script>
 </body>
