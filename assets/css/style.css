@@ -155,3 +155,125 @@ sub { bottom: -.25em; }
   font-style: normal;
   font-weight: bold;
 }
+
+/* ==========================================================================
+  common styling starts here
+  ========================================================================== */
+
+  *,
+  *::before,
+  *::after { box-sizing: border-box; }
+
+  .wrapper {
+    width: 80%;
+    max-width: 1349px;
+    margin: 0 auto;
+  }
+
+  ul { list-style-type: none; }
+
+/* ==========================================================================
+  common styling ends here
+  ========================================================================== */
+
+/* ==========================================================================
+  Header starts here
+  ========================================================================== */
+
+  header {
+    width: 100%;
+    background-color: #f17140; 
+  }
+
+  header .wrapper { text-align: center; }
+
+  h1 {
+    padding: 20px;
+    color: #fff;
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    text-transform: capitalize;
+  }
+
+/* ==========================================================================
+  Header ends here
+  ========================================================================== */
+
+/* ==========================================================================
+  Main starts here
+  ========================================================================== */
+  main { width: 100%; }
+
+  main .wrapper {
+    padding: 20px;
+    background-color: #efefef; 
+  }
+
+  h3 {
+    padding: 20px;
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    text-align: center;
+  }
+
+  .product-form { 
+    margin-bottom: 10px;
+    text-align: center; 
+  }
+
+  .form-group { margin-bottom: 10px; }
+
+  .form-group input {
+    width: 30%;
+    padding: 10px;
+    border: 2px solid #d8d3d0;
+    text-transform: capitalize;
+  }
+
+  .btn {
+    padding: 7px 25px;
+    border: 2px solid;
+    background: #f17140;
+    color: #fff;
+    text-transform: uppercase;
+    transition: .3s ease;
+  }
+
+  .btn:hover {
+    background: #fff;
+    color: #f17140;
+  }
+
+  /* Product
+   ========================================================================== */
+
+   .product-list {
+      width: 100%; 
+      display: flex;
+    }
+
+    .product{
+      width: calc(25% - 14px);
+      border: 2px solid #d8d3d0;
+      margin: 0 auto;
+    }
+
+    .product-details li {
+      margin: 5px;
+    }
+
+    .product-image img {
+      width: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .product-details li > span { text-transform: capitalize; }
+
+/* ==========================================================================
+  Main ends here
+  ========================================================================== */
