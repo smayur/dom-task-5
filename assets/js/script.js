@@ -7,18 +7,44 @@ var productList = document.querySelector('.product-list');
 
 /* Display Existing Products from local storage */
 function fetchExistingProducts() {
-  var products = getProductFromLocal();
+  var products = getProductFromLocal(); //call function to fetch exisiting cards
   products.forEach((existingProduct) => {
-    displayProducts(existingProduct.name, existingProduct.quantity);
+    displayProducts(existingProduct.name, existingProduct.quantity); //call function to display existing cards
   });
 }
 
-fetchExistingProducts(); 
+fetchExistingProducts();  //Fetch Products from local storage after page load is done.
 
 saveProduct.addEventListener('click', function(e) {
   e.preventDefault();
-  addProduct(productName, productQuantity);
+
+  //Call function validateInputValues to checked whether fields are empty or not.
+  //And call function addProduct when there is no any error.
+  if (validateInputValues()) {
+    addProduct(productName, productQuantity);  //Call function to add product in array of object.
+  }
 });
+
+//validate Input fields 
+function validateInputValues() {
+  if ( productName.value == '' || productQuantity.value == '' ) {
+    showError('Please fill this field');  //call showError function to show error.
+    return false;
+  } else {
+    showError();
+    return true;
+  }
+}
+
+function showError(errorMessage) {
+  document.querySelectorAll('.error').forEach(element => {
+  if ( element.previousElementSibling.value === '' || element.previousElementSibling.value === 'null' ) {
+      element.innerHTML = errorMessage;  //If input fields are empty then print message recived from showError function.
+    } else {
+      element.innerHTML = '';
+    }
+  });
+}
 
 
 /* Fetch Existing Products from local storage */
@@ -39,23 +65,26 @@ function addProduct(name, quantity) {
     "quantity": quantity.value,
   }
 
-  var productArray = getProductFromLocal(); 
+  //Before add new product to local and DOM.
+  //Fetch existing product array and then add new product to array.
+  var productArray = getProductFromLocal();
   productArray.push(newProduct);
-  localStorage.setItem('products', JSON.stringify(productArray));
-  productList.innerHTML = '';
-  fetchExistingProducts(); 
-  // displayProducts(newProduct.name, newProduct.quantity);
-  document.querySelector('.product-form').reset();
+  localStorage.setItem('products', JSON.stringify(productArray));  //Save updated product array in local storage.
+  productList.innerHTML = '';  //Before printing products, clear product list DOM.
+  fetchExistingProducts();   //Fetch and Display updated product list
+  document.querySelector('.product-form').reset();   //clear input fields.
 }
  
 
 /* Create and Display product card  */
 function displayProducts(name, quantity) {
+
   if (saveProduct.value === "Update") {
     saveProduct.value = "Submit";
-    clearAll.classList.remove('hide-cancle-btn');
+    clearAll.classList.remove('hide-clear-btn'); 
   }
 
+  // create element to show product
   var productCard = document.createElement('li');
   productCard.classList.add('product');
   productCard.innerHTML = `
@@ -75,12 +104,12 @@ function displayProducts(name, quantity) {
   </ul>
   `;
   productList.appendChild(productCard);
-  addDeleteFunction();
-  addEditFunction();
+  addDeleteFunction(); //call function to add delete functionality
+  addEditFunction();  //call function to add edit functionality
 };
 
 
-// Add Event Listener to delete button.
+// Add Event Listener to each delete button.
 function addDeleteFunction() {
   document.querySelectorAll('.delete').forEach((element) => {
     element.addEventListener('click', deleteCard);
@@ -88,11 +117,11 @@ function addDeleteFunction() {
 }
 
 function deleteCard(ele) {
-  var productArray = getProductFromLocal();
+  var productArray = getProductFromLocal();  //Fetch products from local storage
   productArray.splice(productArray.findIndex(product => 
-    product.name === ele.path[2].children[0].lastElementChild.innerText.toLowerCase()), 1);
-  ele.path[3].remove();
-  localStorage.setItem('products', JSON.stringify(productArray));
+    product.name === ele.path[2].children[0].lastElementChild.innerText.toLowerCase()), 1);  //Remove product from array of object when "name" is matched.
+  ele.path[3].remove();  //remove product from DOM.
+  localStorage.setItem('products', JSON.stringify(productArray));  //Save updated product array in local storage.
 }
 
 // Add Event Listener to Edit button.
@@ -104,17 +133,18 @@ function addEditFunction() {
 
 
 function editCard(e) {
-  clearAll.classList.add('hide-clear-btn');
-  saveProduct.value = "Update";
+  clearAll.classList.add('hide-clear-btn');  //Hide Clear All button.
+  saveProduct.value = "Update";  //change value of submit button to Update.
   card = e.path[2];
+  //Set card name and quantity to input value.
   productName.value = card.children[0].lastElementChild.innerText;
   productQuantity.value = card.children[1].lastElementChild.innerText;
-  deleteCard(e);
+  deleteCard(e);  //call function to Delete edited card.
 }
 
 /* Clear local storage and Product cards */ 
 clearAll.addEventListener('click', function(e) {
   e.preventDefault();
-  localStorage.clear();
-  productList.innerHTML = '';
+  localStorage.clear();  //clear local storage.
+  productList.innerHTML = '';  //clear product list in DOM
 });
