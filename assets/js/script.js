@@ -51,6 +51,11 @@ function addProduct(name, quantity) {
 
 /* Create and Display product card  */
 function displayProducts(name, quantity) {
+  if (saveProduct.value === "Update") {
+    saveProduct.value = "Submit";
+    clearAll.classList.remove('hide-cancle-btn');
+  }
+
   var productCard = document.createElement('li');
   productCard.classList.add('product');
   productCard.innerHTML = `
@@ -71,6 +76,7 @@ function displayProducts(name, quantity) {
   `;
   productList.appendChild(productCard);
   addDeleteFunction();
+  addEditFunction();
 };
 
 
@@ -87,6 +93,23 @@ function deleteCard(ele) {
     product.name === ele.path[2].children[0].lastElementChild.innerText.toLowerCase()), 1);
   ele.path[3].remove();
   localStorage.setItem('products', JSON.stringify(productArray));
+}
+
+// Add Event Listener to Edit button.
+function addEditFunction() {
+  document.querySelectorAll('.edit').forEach((element) => {
+    element.addEventListener('click', editCard);
+  });
+}
+
+
+function editCard(e) {
+  clearAll.classList.add('hide-clear-btn');
+  saveProduct.value = "Update";
+  card = e.path[2];
+  productName.value = card.children[0].lastElementChild.innerText;
+  productQuantity.value = card.children[1].lastElementChild.innerText;
+  deleteCard(e);
 }
 
 /* Clear local storage and Product cards */ 
